@@ -6,19 +6,13 @@
     </div>
 
     <div class="list-menu">
-      <a class="list-menu-item is-active">
-        <p>List 1</p>
-      </a>
-      <a class="list-menu-item">
-        <p>List 2</p>
-      </a>
-      <a class="list-menu-item">
-        <p>List 3</p>
+      <a class="list-menu-item" *ngFor="let list of lists" [routerLink]="['/lists', list._id]" routerLinkActive="is-active">
+        <p>{{list.title}}</p>
       </a>
     </div>
 
     <div class="bottom">
-      <button>+ New List</button>
+      <button routerLink="/new-list">+ New List</button>
     </div>
 
   </div>
@@ -28,19 +22,13 @@
     </div>
 
     <div class="task-menu">
-      <a class="task-menu-item complete">
-        <p>Task #1 Do the laundry</p>
-      </a>
-      <a class="task-menu-item">
-        <p>Task #2 Do the laundry</p>
-      </a>
-      <a class="task-menu-item">
-        <p>Task #3 Do the laundry</p>
+      <a class="task-menu-item" *ngFor="let task of tasks">
+        <p>{{task.title}}</p>
       </a>
     </div>
 
     <div class="bottom">
-      <button>+ New Task</button>
+      <button [disabled]="isTaskBtnDisabled"  routerLink="./new-task">+ New Task</button>
     </div>
   </div>
 </div>
