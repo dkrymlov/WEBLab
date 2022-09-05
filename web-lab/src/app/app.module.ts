@@ -10,6 +10,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {NewListComponent} from "./components/task-manager/new-list/new-list.component";
 import { NewTaskComponent } from './components/task-manager/new-task/new-task.component';
+import { EditTaskComponent } from './components/task-manager/edit-task/edit-task.component';
+import {FormsModule} from "@angular/forms";
+import { EditListComponent } from './components/task-manager/edit-list/edit-list.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -18,14 +22,18 @@ import { NewTaskComponent } from './components/task-manager/new-task/new-task.co
     LoginPageComponent,
     SignupPageComponent,
     NewListComponent,
-    NewTaskComponent
+    NewTaskComponent,
+    EditTaskComponent,
+    EditListComponent,
+    HeaderComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatIconModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatIconModule,
+        HttpClientModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

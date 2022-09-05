@@ -70,4 +70,7 @@ button{
   &:active{
     transform: scale(0.95);
   }
+  &.not-active{
+    opacity: 50%;
+  }
 }

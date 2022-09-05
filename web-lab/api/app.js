@@ -164,11 +164,20 @@ app.post('/lists', (req,res)=>{
  * PATCH /lists/:id
  * Purpose: Update a specified list
  */
-app.patch('/lists/:id', authenticate, (req, res) => {
+/*app.patch('/lists/:id', authenticate, (req, res) => {
   // We want to update the specified list (list document with id in the URL) with the new values specified in the JSON body of the request
   List.findOneAndUpdate({ _id: req.params.id, _userId: req.user_id }, {
     $set: req.body
   }).then(() => {
+    res.send({ 'message': 'updated successfully'});
+  });
+});*/
+
+app.patch('/lists/:id', (req, res) => {
+  // We want to update the specified list (list document with id in the URL) with the new values specified in the JSON body of the request
+  List.findOneAndUpdate({ _id: req.params.id}, {
+    $set: req.body
+  }).then(() =>{
     res.send({ 'message': 'updated successfully'});
   });
 });
@@ -177,7 +186,7 @@ app.patch('/lists/:id', authenticate, (req, res) => {
  * DELETE /lists/:id
  * Purpose: Delete a list
  */
-app.delete('/lists/:id', authenticate, (req, res) => {
+/*app.delete('/lists/:id', authenticate, (req, res) => {
   // We want to delete the specified list (document with id in the URL)
   List.findOneAndRemove({
     _id: req.params.id,
@@ -188,8 +197,17 @@ app.delete('/lists/:id', authenticate, (req, res) => {
     // delete all the tasks that are in the deleted list
     deleteTasksFromList(removedListDoc._id);
   })
+});*/
+app.delete('/lists/:id', (req, res) => {
+  // We want to delete the specified list (document with id in the URL)
+  List.findOneAndRemove({
+    _id: req.params.id,
+  }).then((removedListDoc) => {
+    res.send(removedListDoc);
+    // delete all the tasks that are in the deleted list
+    deleteTasksFromList(removedListDoc._id);
+  })
 });
-
 
 /**
  * GET /lists/:listId/tasks
@@ -280,12 +298,44 @@ app.post('/lists/:listId/tasks', (req, res) => {
  * PATCH /lists/:listId/tasks/:taskId
  * Purpose: Update an existing task
  */
-app.patch('/lists/:listId/tasks/:taskId', authenticate, (req, res) => {
+/*app.patch('/lists/:listId/tasks/:taskId', authenticate, (req, res) => {
   // We want to update an existing task (specified by taskId)
 
   List.findOne({
     _id: req.params.listId,
     _userId: req.user_id
+  }).then((list) => {
+    if (list) {
+      // list object with the specified conditions was found
+      // therefore the currently authenticated user can make updates to tasks within this list
+      return true;
+    }
+
+    // else - the list object is undefined
+    return false;
+  }).then((canUpdateTasks) => {
+    if (canUpdateTasks) {
+      // the currently authenticated user can update tasks
+      Task.findOneAndUpdate({
+          _id: req.params.taskId,
+          _listId: req.params.listId
+        }, {
+          $set: req.body
+        }
+      ).then(() => {
+        res.send({ message: 'Updated successfully.' })
+      })
+    } else {
+      res.sendStatus(404);
+    }
+  })
+});*/
+
+app.patch('/lists/:listId/tasks/:taskId', (req, res) => {
+  // We want to update an existing task (specified by taskId)
+
+  List.findOne({
+    _id: req.params.listId,
   }).then((list) => {
     if (list) {
       // list object with the specified conditions was found
@@ -317,11 +367,41 @@ app.patch('/lists/:listId/tasks/:taskId', authenticate, (req, res) => {
  * DELETE /lists/:listId/tasks/:taskId
  * Purpose: Delete a task
  */
+/*
 app.delete('/lists/:listId/tasks/:taskId', authenticate, (req, res) => {
 
   List.findOne({
     _id: req.params.listId,
     _userId: req.user_id
+  }).then((list) => {
+    if (list) {
+      // list object with the specified conditions was found
+      // therefore the currently authenticated user can make updates to tasks within this list
+      return true;
+    }
+
+    // else - the list object is undefined
+    return false;
+  }).then((canDeleteTasks) => {
+
+    if (canDeleteTasks) {
+      Task.findOneAndRemove({
+        _id: req.params.taskId,
+        _listId: req.params.listId
+      }).then((removedTaskDoc) => {
+        res.send(removedTaskDoc);
+      })
+    } else {
+      res.sendStatus(404);
+    }
+  });
+});
+*/
+
+app.delete('/lists/:listId/tasks/:taskId', (req, res) => {
+
+  List.findOne({
+    _id: req.params.listId,
   }).then((list) => {
     if (list) {
       // list object with the specified conditions was found

@@ -13,7 +13,7 @@ export class TaskViewComponent implements OnInit {
   tasks: any;
   selectedListId: string = ""
 
-  isTaskBtnDisabled: boolean = true
+  isTaskBtnVisible: boolean = false
 
   constructor(private taskService: TaskService, private route: ActivatedRoute) { }
 
@@ -21,7 +21,7 @@ export class TaskViewComponent implements OnInit {
     this.route.params.subscribe(
       (params: Params) => {
         if (params['listId']) {
-          this.isTaskBtnDisabled = false
+          this.isTaskBtnVisible = true
           this.selectedListId = params['listId'];
           this.taskService.getTasks(params['listId']).subscribe((tasks: any) => {
             this.tasks = tasks;
@@ -37,4 +37,31 @@ export class TaskViewComponent implements OnInit {
     })
   }
 
+  onTaskClick(task: any) {
+    if (task.completed){
+      this.taskService.uncompleteTask(task).subscribe(()=>{
+        console.log("UnCompleted! " + task._id)
+        task.completed = false
+      })
+    }else {
+      this.taskService.completeTask(task).subscribe(()=>{
+        console.log("Completed! " + task._id)
+        task.completed = true
+      })
+    }
+  }
+
+  deleteTask(_id: string, _listId: string) {
+    this.taskService.deleteTask(_id, _listId).subscribe(()=>{
+      console.log("Delete task " + _id + "from " + _listId + " successful! ")
+    })
+    window.location.reload()
+  }
+
+  deleteList(_listId: string) {
+      this.taskService.deleteList(_listId).subscribe(()=>{
+        console.log("Delete list " + _listId + " successful!")
+      })
+    window.location.reload()
+  }
 }

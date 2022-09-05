@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, SimpleChanges} from '@angular/core';
 import {TaskViewComponent} from "../task-view/task-view.component";
 import {TaskService} from "../../../services/task/task.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
@@ -14,6 +14,7 @@ export class NewTaskComponent implements OnInit {
   }
 
   listId: string = '';
+  inputModel: any = '';
 
   ngOnInit(): void {
     this.route.params.subscribe(
@@ -22,6 +23,10 @@ export class NewTaskComponent implements OnInit {
       }
     )
     console.log(this.listId)
+    console.log(this.inputModel)
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
   }
 
   createTask(title: string) {

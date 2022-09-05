@@ -7,6 +7,7 @@ import {TaskService} from "../../../services/task/task.service";
   styleUrls: ['./new-list.component.scss']
 })
 export class NewListComponent implements OnInit {
+  inputModel: any = "";
 
   constructor(private taskService: TaskService) { }
 
