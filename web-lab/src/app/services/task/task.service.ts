@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {WebRequestService} from "../web/web-request.service";
-import {Params} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +7,6 @@ import {Params} from "@angular/router";
 export class TaskService {
 
   constructor(private webRequestService: WebRequestService) { }
-
-  createList(title: string){
-    return this.webRequestService.post('lists', {title});
-  }
-
-  getLists() {
-    return this.webRequestService.get('lists')
-  }
 
   createTask(title: string, _listId: string) {
     return this.webRequestService.post(`lists/${_listId}/tasks`, {title, _listId})
@@ -39,13 +30,5 @@ export class TaskService {
 
   editTask(title: string, _id: string, _listId: string){
     return this.webRequestService.patch(`lists/${_listId}/tasks/${_id}`, {title: title})
-  }
-
-  deleteList(_listId: string) {
-    return this.webRequestService.delete(`lists/${_listId}`)
-  }
-
-  editList(title: string, _listId: string) {
-    return this.webRequestService.patch(`lists/${_listId}`, {title: title})
   }
 }

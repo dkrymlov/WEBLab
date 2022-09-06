@@ -114,7 +114,7 @@ let verifySession = (req, res, next) => {
  * GET /lists
  * Purpose: Get all lists
  */
-/*app.get('/lists', authenticate, (req, res) => {
+app.get('/lists', authenticate, (req, res) => {
   // We want to return an array of all the lists that belong to the authenticated user
   List.find({
     _userId: req.user_id
@@ -123,19 +123,19 @@ let verifySession = (req, res, next) => {
   }).catch((e) => {
     res.send(e);
   });
-})*/
+})
 
-app.get('/lists', (req, res)=>{
+/*app.get('/lists', (req, res)=>{
   List.find().then((lists)=>{
     res.send(lists)
   })
-})
+})*/
 
 /**
  * POST /lists
  * Purpose: Create a list
  */
-/*app.post('/lists', authenticate, (req, res) => {
+app.post('/lists', authenticate, (req, res) => {
   // We want to create a new list and return the new list document back to the user (which includes the id)
   // The list information (fields) will be passed in via the JSON request body
   let title = req.body.title;
@@ -148,9 +148,9 @@ app.get('/lists', (req, res)=>{
     // the full list document is returned (incl. id)
     res.send(listDoc);
   })
-});*/
+});
 
-app.post('/lists', (req,res)=>{
+/*app.post('/lists', (req,res)=>{
   let title = req.body.title;
   let newList = new List({
     title
@@ -158,35 +158,35 @@ app.post('/lists', (req,res)=>{
   newList.save().then((listDoc) => {
     res.send(listDoc);
   });
-})
+})*/
 
 /**
  * PATCH /lists/:id
  * Purpose: Update a specified list
  */
-/*app.patch('/lists/:id', authenticate, (req, res) => {
+app.patch('/lists/:id', authenticate, (req, res) => {
   // We want to update the specified list (list document with id in the URL) with the new values specified in the JSON body of the request
   List.findOneAndUpdate({ _id: req.params.id, _userId: req.user_id }, {
     $set: req.body
   }).then(() => {
     res.send({ 'message': 'updated successfully'});
   });
-});*/
+});
 
-app.patch('/lists/:id', (req, res) => {
+/*app.patch('/lists/:id', (req, res) => {
   // We want to update the specified list (list document with id in the URL) with the new values specified in the JSON body of the request
   List.findOneAndUpdate({ _id: req.params.id}, {
     $set: req.body
   }).then(() =>{
     res.send({ 'message': 'updated successfully'});
   });
-});
+});*/
 
 /**
  * DELETE /lists/:id
  * Purpose: Delete a list
  */
-/*app.delete('/lists/:id', authenticate, (req, res) => {
+app.delete('/lists/:id', authenticate, (req, res) => {
   // We want to delete the specified list (document with id in the URL)
   List.findOneAndRemove({
     _id: req.params.id,
@@ -197,8 +197,8 @@ app.patch('/lists/:id', (req, res) => {
     // delete all the tasks that are in the deleted list
     deleteTasksFromList(removedListDoc._id);
   })
-});*/
-app.delete('/lists/:id', (req, res) => {
+});
+/*app.delete('/lists/:id', (req, res) => {
   // We want to delete the specified list (document with id in the URL)
   List.findOneAndRemove({
     _id: req.params.id,
@@ -207,36 +207,36 @@ app.delete('/lists/:id', (req, res) => {
     // delete all the tasks that are in the deleted list
     deleteTasksFromList(removedListDoc._id);
   })
-});
+});*/
 
 /**
  * GET /lists/:listId/tasks
  * Purpose: Get all tasks in a specific list
  */
-/*app.get('/lists/:listId/tasks', authenticate, (req, res) => {
+app.get('/lists/:listId/tasks', authenticate, (req, res) => {
   // We want to return all tasks that belong to a specific list (specified by listId)
   Task.find({
     _listId: req.params.listId
   }).then((tasks) => {
     res.send(tasks);
   })
-});*/
+});
 
-app.get('/lists/:listId/tasks', (req, res) => {
+/*app.get('/lists/:listId/tasks', (req, res) => {
   // We want to return all tasks that belong to a specific list (specified by listId)
   Task.find({
     _listId: req.params.listId
   }).then((tasks) => {
     res.send(tasks);
   })
-})
+})*/
 
 
 /**
  * POST /lists/:listId/tasks
  * Purpose: Create a new task in a specific list
  */
-/*app.post('/lists/:listId/tasks', authenticate, (req, res) => {
+app.post('/lists/:listId/tasks', authenticate, (req, res) => {
   // We want to create a new task in a list specified by listId
 
   List.findOne({
@@ -264,9 +264,9 @@ app.get('/lists/:listId/tasks', (req, res) => {
       res.sendStatus(404);
     }
   })
-})*/
+})
 
-app.post('/lists/:listId/tasks', (req, res) => {
+/*app.post('/lists/:listId/tasks', (req, res) => {
   List.findOne({
     _id: req.params.listId,
   }).then((list) => {
@@ -292,13 +292,13 @@ app.post('/lists/:listId/tasks', (req, res) => {
     }
   })
 
-})
+})*/
 
 /**
  * PATCH /lists/:listId/tasks/:taskId
  * Purpose: Update an existing task
  */
-/*app.patch('/lists/:listId/tasks/:taskId', authenticate, (req, res) => {
+app.patch('/lists/:listId/tasks/:taskId', authenticate, (req, res) => {
   // We want to update an existing task (specified by taskId)
 
   List.findOne({
@@ -329,9 +329,9 @@ app.post('/lists/:listId/tasks', (req, res) => {
       res.sendStatus(404);
     }
   })
-});*/
+});
 
-app.patch('/lists/:listId/tasks/:taskId', (req, res) => {
+/*app.patch('/lists/:listId/tasks/:taskId', (req, res) => {
   // We want to update an existing task (specified by taskId)
 
   List.findOne({
@@ -361,13 +361,12 @@ app.patch('/lists/:listId/tasks/:taskId', (req, res) => {
       res.sendStatus(404);
     }
   })
-});
+});*/
 
 /**
  * DELETE /lists/:listId/tasks/:taskId
  * Purpose: Delete a task
  */
-/*
 app.delete('/lists/:listId/tasks/:taskId', authenticate, (req, res) => {
 
   List.findOne({
@@ -396,8 +395,8 @@ app.delete('/lists/:listId/tasks/:taskId', authenticate, (req, res) => {
     }
   });
 });
-*/
 
+/*
 app.delete('/lists/:listId/tasks/:taskId', (req, res) => {
 
   List.findOne({
@@ -425,6 +424,7 @@ app.delete('/lists/:listId/tasks/:taskId', (req, res) => {
     }
   });
 });
+*/
 
 
 

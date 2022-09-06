@@ -10,6 +10,7 @@ import {ActivatedRoute} from "@angular/router";
 export class EditTaskComponent implements OnInit {
 
   listId: string = ""
+  taskId: string = ""
   inputModel: any = "";
 
   constructor(private taskService: TaskService, private route: ActivatedRoute) {
@@ -22,8 +23,10 @@ export class EditTaskComponent implements OnInit {
   editTask(title: string) {
     console.log(title)
     this.route.params.subscribe(params =>{
+      console.log(params)
       this.listId = params['listId']
-      this.taskService.editTask(title, params['taskId'], params['listId']).subscribe(()=>{
+      this.taskId = params['taskId']
+      this.taskService.editTask(title, this.taskId, this.listId).subscribe(()=>{
         console.log("Edit successful")
       })
     })

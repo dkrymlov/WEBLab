@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {TaskService} from "../../../services/task/task.service";
 import {ActivatedRoute, Params} from "@angular/router";
+import {TaskModel} from "../../../models/task.model";
+import {ListService} from "../../../services/list/list.service";
 
 @Component({
   selector: 'app-task-view',
@@ -15,9 +17,10 @@ export class TaskViewComponent implements OnInit {
 
   isTaskBtnVisible: boolean = false
 
-  constructor(private taskService: TaskService, private route: ActivatedRoute) { }
+  constructor(private listService:ListService,private taskService: TaskService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.lists = undefined
     this.route.params.subscribe(
       (params: Params) => {
         if (params['listId']) {
@@ -32,7 +35,7 @@ export class TaskViewComponent implements OnInit {
       }
     )
 
-    this.taskService.getLists().subscribe((lists: any) => {
+    this.listService.getLists().subscribe((lists: any) => {
       this.lists = lists;
     })
   }
@@ -59,7 +62,7 @@ export class TaskViewComponent implements OnInit {
   }
 
   deleteList(_listId: string) {
-      this.taskService.deleteList(_listId).subscribe(()=>{
+      this.listService.deleteList(_listId).subscribe(()=>{
         console.log("Delete list " + _listId + " successful!")
       })
     window.location.reload()

@@ -1,4 +1,4 @@
-export class Task {
+export class TaskModel {
    _id: string;
    title: string;
    _listId: string;

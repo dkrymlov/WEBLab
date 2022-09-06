@@ -12,6 +12,7 @@ h1{
   margin-left: 50px;
   font-size: 40px;
   color: lightseagreen;
+  margin-bottom: 0;
 }
 
 mat-icon{
@@ -36,9 +37,19 @@ input{
 .bottom{
   display: flex;
   flex-direction: row;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-left: 50px;
   margin-right: 50px;
+}
+
+.err{
+  width: 70%;
+  height: 20px;
+  background-color: transparent;
+  font-size: 20px;
+  color: red;
+  text-align: center;
+  margin: 0 auto 10px;
 }
 
 .enhanced-input{

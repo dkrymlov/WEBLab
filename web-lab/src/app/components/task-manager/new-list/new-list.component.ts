@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {TaskService} from "../../../services/task/task.service";
+import {ListService} from "../../../services/list/list.service";
 
 @Component({
   selector: 'app-new-list',
@@ -9,13 +9,13 @@ import {TaskService} from "../../../services/task/task.service";
 export class NewListComponent implements OnInit {
   inputModel: any = "";
 
-  constructor(private taskService: TaskService) { }
+  constructor(private listService: ListService) { }
 
   ngOnInit(): void {
   }
 
   createList(title: string) {
-    this.taskService.createList(title).subscribe((response: any)=>{
+    this.listService.createList(title).subscribe((response: any)=>{
       console.log(response)
     })
   }

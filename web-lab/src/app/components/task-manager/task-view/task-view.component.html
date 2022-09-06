@@ -30,7 +30,8 @@
   </div>
   <div class="right-bar">
     <div class="top">
-      <h1>Tasks</h1>
+      <h1 *ngIf="tasks">Tasks</h1>
+      <h1 *ngIf="!tasks" style="opacity: 50%; color: black">Please select a list from the sidebar</h1>
     </div>
 
     <div class="task-menu">
@@ -39,7 +40,7 @@
           <div>{{task.title}}</div>
         </a>
         <div class="task-buttons">
-          <div class="edit-btn" [routerLink]="['./{{task._id}}/edit']">
+          <div class="edit-btn" [routerLink]="['./' + task._id + '/edit']">
             <mat-icon>edit</mat-icon>
           </div>
           <div class="delete-btn" (click)="deleteTask(task._id, task._listId)">
