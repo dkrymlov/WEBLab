@@ -2,14 +2,21 @@
   "name": "web-lab",
   "version": "0.0.0",
   "scripts": {
+    "heroku-postbuild": "ng build --prod"
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
+  "engines": {
+    "node": "18.8.0",
+    "npm": "8.19.1"
+  },
   "private": true,
   "dependencies": {
+    "@angular/cli": "~14.0.1",
+    "@angular/compiler-cli": "^14.0.0",
     "@angular/animations": "^14.0.0",
     "@angular/common": "^14.0.0",
     "@angular/compiler": "^14.0.0",
@@ -26,6 +33,7 @@
     "rxjs": "~6.2.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
+    "typescript": "~4.7.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.0.1",
