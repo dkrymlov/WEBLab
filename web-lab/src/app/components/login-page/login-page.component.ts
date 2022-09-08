@@ -29,9 +29,9 @@ export class LoginPageComponent implements OnInit {
       if (res.status !== 400) {
         this.email = ''
         this.password = ''
-        this.router.navigate(['/lists']);
+        this.router.navigate(['/todo/lists']);
         setTimeout(()=>{
-          window.location.reload()
+          //window.location.reload()
         }, 1)
       }
     })

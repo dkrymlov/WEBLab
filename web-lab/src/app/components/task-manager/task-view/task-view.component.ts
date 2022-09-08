@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, SimpleChanges} from '@angular/core';
 import {TaskService} from "../../../services/task/task.service";
-import {ActivatedRoute, Params} from "@angular/router";
-import {TaskModel} from "../../../models/task.model";
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import {ListService} from "../../../services/list/list.service";
 
 @Component({
@@ -17,7 +17,12 @@ export class TaskViewComponent implements OnInit {
 
   isTaskBtnVisible: boolean = false
 
-  constructor(private listService:ListService,private taskService: TaskService, private route: ActivatedRoute) { }
+  constructor(private listService:ListService, private taskService: TaskService, private route: ActivatedRoute, private router: Router) {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes)
+  }
 
   ngOnInit() {
     this.lists = undefined
@@ -27,7 +32,8 @@ export class TaskViewComponent implements OnInit {
           this.isTaskBtnVisible = true
           this.selectedListId = params['listId'];
           this.taskService.getTasks(params['listId']).subscribe((tasks: any) => {
-            this.tasks = tasks;
+              this.tasks = tasks;
+            console.log(tasks)
           })
         } else {
           this.tasks = undefined;
@@ -58,13 +64,29 @@ export class TaskViewComponent implements OnInit {
     this.taskService.deleteTask(_id, _listId).subscribe(()=>{
       console.log("Delete task " + _id + "from " + _listId + " successful! ")
     })
-    window.location.reload()
+    setTimeout(()=>{
+      this.ngOnInit()
+    }, 100)
   }
 
   deleteList(_listId: string) {
       this.listService.deleteList(_listId).subscribe(()=>{
         console.log("Delete list " + _listId + " successful!")
       })
-    window.location.reload()
+    setTimeout(()=>{
+      this.ngOnInit()
+    }, 100)
+  }
+
+  drop($event: CdkDragDrop<string[]>) {
+    if ($event.previousContainer === $event.container) {
+      moveItemInArray($event.container.data, $event.previousIndex, $event.currentIndex);
+      console.log($event.container.data)
+    }else {
+      transferArrayItem($event.previousContainer.data,
+        $event.container.data,
+        $event.previousIndex,
+        $event.currentIndex);
+    }
   }
 }

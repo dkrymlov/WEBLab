@@ -10,7 +10,7 @@ describe('EditTaskComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ EditTaskComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(EditTaskComponent);
     component = fixture.componentInstance;

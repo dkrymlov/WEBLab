@@ -9,26 +9,27 @@ export class TaskService {
   constructor(private webRequestService: WebRequestService) { }
 
   createTask(title: string, _listId: string) {
-    return this.webRequestService.post(`lists/${_listId}/tasks`, {title, _listId})
+    return this.webRequestService.post(`todo/lists/${_listId}/tasks`, {title, _listId})
   }
 
   getTasks(listId: string) {
-    return this.webRequestService.get(`lists/${listId}/tasks`)
+    return this.webRequestService.get(`todo/lists/${listId}/tasks`)
   }
 
   completeTask(task: any){
-    return this.webRequestService.patch(`lists/${task._listId}/tasks/${task._id}`, {completed: true})
+    return this.webRequestService.patch(`todo/lists/${task._listId}/tasks/${task._id}`, {completed: true})
   }
 
   uncompleteTask(task: any){
-    return this.webRequestService.patch(`lists/${task._listId}/tasks/${task._id}`, {completed: false})
+    return this.webRequestService.patch(`todo/lists/${task._listId}/tasks/${task._id}`, {completed: false})
   }
 
   deleteTask(_id: string, _listId: string) {
-    return this.webRequestService.delete(`lists/${_listId}/tasks/${_id}`)
+    return this.webRequestService.delete(`todo/lists/${_listId}/tasks/${_id}`)
   }
 
   editTask(title: string, _id: string, _listId: string){
-    return this.webRequestService.patch(`lists/${_listId}/tasks/${_id}`, {title: title})
+    return this.webRequestService.patch(`todo/lists/${_listId}/tasks/${_id}`, {title: title})
   }
+
 }

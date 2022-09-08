@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ListService} from "../../../services/list/list.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-new-list',
@@ -9,7 +10,7 @@ import {ListService} from "../../../services/list/list.service";
 export class NewListComponent implements OnInit {
   inputModel: any = "";
 
-  constructor(private listService: ListService) { }
+  constructor(private listService: ListService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }

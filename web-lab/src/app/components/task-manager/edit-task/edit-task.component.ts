@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TaskService} from "../../../services/task/task.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-edit-task',
@@ -13,7 +13,7 @@ export class EditTaskComponent implements OnInit {
   taskId: string = ""
   inputModel: any = "";
 
-  constructor(private taskService: TaskService, private route: ActivatedRoute) {
+  constructor(private taskService: TaskService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {

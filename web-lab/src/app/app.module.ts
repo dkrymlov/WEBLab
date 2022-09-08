@@ -15,6 +15,8 @@ import {FormsModule} from "@angular/forms";
 import { EditListComponent } from './components/task-manager/edit-list/edit-list.component';
 import { HeaderComponent } from './components/header/header.component';
 import {WebReqInterceptor} from "./services/web/web-req.interceptor";
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -26,14 +28,16 @@ import {WebReqInterceptor} from "./services/web/web-req.interceptor";
     NewTaskComponent,
     EditTaskComponent,
     EditListComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         MatIconModule,
         HttpClientModule,
-        FormsModule
+        FormsModule,
+        DragDropModule,
+        BrowserAnimationsModule
     ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptor, multi: true}

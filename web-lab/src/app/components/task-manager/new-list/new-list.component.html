@@ -5,7 +5,7 @@
   <div class="enhanced-input">
     <mat-icon>format_list_bulleted</mat-icon>
       <input #input [(ngModel)]="inputModel" type="text" placeholder="Title">
-      <button (click)="createList(input.value)" [disabled]="inputModel ==''" [ngClass]="{'not-active': inputModel === ''}" routerLink="">Create</button>
+      <button (click)="createList(input.value)" [disabled]="inputModel ==''" [ngClass]="{'not-active': inputModel === ''}" routerLink="/..">Create</button>
   </div>
-  <a class="backBtn" routerLink="">Go back</a>
+  <a class="backBtn" routerLink="..">Go back</a>
 </div>

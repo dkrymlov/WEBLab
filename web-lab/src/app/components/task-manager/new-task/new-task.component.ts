@@ -26,9 +26,6 @@ export class NewTaskComponent implements OnInit {
     console.log(this.inputModel)
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-  }
-
   createTask(title: string) {
     this.taskService.createTask(title, this.listId).subscribe((response: any)=>{
       console.log(response)

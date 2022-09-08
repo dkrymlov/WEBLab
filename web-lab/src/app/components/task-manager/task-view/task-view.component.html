@@ -7,9 +7,9 @@
       <h1>Lists</h1>
     </div>
 
-    <div class="list-menu">
-      <div class="list-control" *ngFor="let list of lists" >
-        <a class="list-menu-item" #item [routerLink]="['/lists', list._id]" routerLinkActive="is-active">
+    <div class="list-menu" cdkDropList [cdkDropListData]="lists" (cdkDropListDropped)="drop($event)">
+      <div class="list-control" cdkDrag cdkDragPreviewContainer="parent" *ngFor="let list of lists" >
+        <a class="list-menu-item" #item [routerLink]="['/todo/lists', list._id]" routerLinkActive="is-active">
           <p>{{list.title}}</p>
         </a>
         <div class="list-buttons" [ngClass]="{'invisible' : !item.classList.contains('is-active') }">
@@ -24,7 +24,7 @@
     </div>
 
     <div class="bottom">
-      <button routerLink="/new-list">+ New List</button>
+      <button routerLink="/todo/new-list">+ New List</button>
     </div>
 
   </div>
@@ -34,9 +34,10 @@
       <h1 *ngIf="!tasks" style="opacity: 50%; color: black">Please select a list from the sidebar</h1>
     </div>
 
-    <div class="task-menu">
+
+    <div cdkDropList [cdkDropListData]="tasks" (cdkDropListDropped)="drop($event)" class="task-menu">
       <div class="task-control" *ngFor="let task of tasks">
-        <a class="task-menu-item" (click)="onTaskClick(task)" [ngClass]="{'complete':task.completed}">
+        <a class="task-menu-item" cdkDrag cdkDragPreviewContainer="parent" (click)="onTaskClick(task)" [ngClass]="{'complete':task.completed}">
           <div>{{task.title}}</div>
         </a>
         <div class="task-buttons">
@@ -49,6 +50,7 @@
         </div>
       </div>
     </div>
+
 
     <div *ngIf="isTaskBtnVisible" class="bottom">
       <button [disabled]="!isTaskBtnVisible" routerLink="./new-task">+ New Task</button>

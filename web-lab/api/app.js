@@ -1,21 +1,23 @@
 const express = require('express');
 const app = express();
-
 const { mongoose } = require('./db/mongoose');
-
 const bodyParser = require('body-parser');
-
 // Load in the mongoose models
 const { List, Task, User } = require('./db/models');
+//socket.io
 
 const jwt = require('jsonwebtoken');
+const {connection} = require("mongoose");
+
+var server = app.listen(3000, () => {
+  console.log("Server is listening on port 3000");
+})
 
 
 /* MIDDLEWARE  */
 
 // Load middleware
 app.use(bodyParser.json());
-
 
 // CORS HEADERS MIDDLEWARE
 app.use(function (req, res, next) {
@@ -114,7 +116,7 @@ let verifySession = (req, res, next) => {
  * GET /lists
  * Purpose: Get all lists
  */
-app.get('/lists', authenticate, (req, res) => {
+app.get('/todo/lists', authenticate, (req, res) => {
   // We want to return an array of all the lists that belong to the authenticated user
   List.find({
     _userId: req.user_id
@@ -135,7 +137,7 @@ app.get('/lists', authenticate, (req, res) => {
  * POST /lists
  * Purpose: Create a list
  */
-app.post('/lists', authenticate, (req, res) => {
+app.post('/todo/lists', authenticate, (req, res) => {
   // We want to create a new list and return the new list document back to the user (which includes the id)
   // The list information (fields) will be passed in via the JSON request body
   let title = req.body.title;
@@ -164,7 +166,7 @@ app.post('/lists', authenticate, (req, res) => {
  * PATCH /lists/:id
  * Purpose: Update a specified list
  */
-app.patch('/lists/:id', authenticate, (req, res) => {
+app.patch('/todo/lists/:id', authenticate, (req, res) => {
   // We want to update the specified list (list document with id in the URL) with the new values specified in the JSON body of the request
   List.findOneAndUpdate({ _id: req.params.id, _userId: req.user_id }, {
     $set: req.body
@@ -186,7 +188,7 @@ app.patch('/lists/:id', authenticate, (req, res) => {
  * DELETE /lists/:id
  * Purpose: Delete a list
  */
-app.delete('/lists/:id', authenticate, (req, res) => {
+app.delete('/todo/lists/:id', authenticate, (req, res) => {
   // We want to delete the specified list (document with id in the URL)
   List.findOneAndRemove({
     _id: req.params.id,
@@ -213,7 +215,7 @@ app.delete('/lists/:id', authenticate, (req, res) => {
  * GET /lists/:listId/tasks
  * Purpose: Get all tasks in a specific list
  */
-app.get('/lists/:listId/tasks', authenticate, (req, res) => {
+app.get('/todo/lists/:listId/tasks', authenticate, (req, res) => {
   // We want to return all tasks that belong to a specific list (specified by listId)
   Task.find({
     _listId: req.params.listId
@@ -236,7 +238,7 @@ app.get('/lists/:listId/tasks', authenticate, (req, res) => {
  * POST /lists/:listId/tasks
  * Purpose: Create a new task in a specific list
  */
-app.post('/lists/:listId/tasks', authenticate, (req, res) => {
+app.post('/todo/lists/:listId/tasks', authenticate, (req, res) => {
   // We want to create a new task in a list specified by listId
 
   List.findOne({
@@ -298,7 +300,7 @@ app.post('/lists/:listId/tasks', authenticate, (req, res) => {
  * PATCH /lists/:listId/tasks/:taskId
  * Purpose: Update an existing task
  */
-app.patch('/lists/:listId/tasks/:taskId', authenticate, (req, res) => {
+app.patch('/todo/lists/:listId/tasks/:taskId', authenticate, (req, res) => {
   // We want to update an existing task (specified by taskId)
 
   List.findOne({
@@ -367,7 +369,7 @@ app.patch('/lists/:listId/tasks/:taskId', authenticate, (req, res) => {
  * DELETE /lists/:listId/tasks/:taskId
  * Purpose: Delete a task
  */
-app.delete('/lists/:listId/tasks/:taskId', authenticate, (req, res) => {
+app.delete('/todo/lists/:listId/tasks/:taskId', authenticate, (req, res) => {
 
   List.findOne({
     _id: req.params.listId,
@@ -515,7 +517,3 @@ let deleteTasksFromList = (_listId) => {
   })
 }
 
-
-app.listen(3000, () => {
-  console.log("Server is listening on port 3000");
-})

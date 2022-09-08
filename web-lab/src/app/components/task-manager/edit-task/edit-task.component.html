@@ -5,8 +5,8 @@
   <div class="enhanced-input">
     <mat-icon>edit</mat-icon>
     <input #input [(ngModel)]="inputModel" type="text" placeholder="Title">
-    <button (click)="editTask(input.value)" [disabled]="inputModel ==''" [ngClass]="{'not-active': inputModel === ''}" routerLink="">Edit</button>
+    <button (click)="editTask(input.value)" [disabled]="inputModel ==''" [ngClass]="{'not-active': inputModel === ''}" routerLink="/..">Edit</button>
   </div>
-  <a class="backBtn" routerLink="">Go back</a>
+  <a class="backBtn" routerLink="/..">Go back</a>
 </div>
 

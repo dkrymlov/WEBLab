@@ -9,15 +9,15 @@ import {LoginPageComponent} from "./components/login-page/login-page.component";
 import {SignupPageComponent} from "./components/signup-page/signup-page.component";
 
 const routes: Routes = [
-  {path: '', redirectTo: 'lists', pathMatch: "full"},
-  {path: 'new-list', component: NewListComponent},
+  {path: '', redirectTo: 'todo/lists', pathMatch: "full"},
+  {path: 'todo/new-list', component: NewListComponent},
   {path: 'login', component: LoginPageComponent},
   {path: 'signup', component: SignupPageComponent},
-  {path: 'lists/:listId/:taskId/edit', component: EditTaskComponent},
-  {path: 'lists/:listId/new-task', component:NewTaskComponent},
-  {path: 'lists/:listId/edit', component: EditListComponent},
-  {path: 'lists', component: TaskViewComponent},
-  {path: 'lists/:listId', component: TaskViewComponent}
+  {path: 'todo/lists/:listId/:taskId/edit', component: EditTaskComponent},
+  {path: 'todo/lists/:listId/new-task', component:NewTaskComponent},
+  {path: 'todo/lists/:listId/edit', component: EditListComponent},
+  {path: 'todo/lists', component: TaskViewComponent},
+  {path: 'todo/lists/:listId', component: TaskViewComponent},
 ];
 
 @NgModule({
