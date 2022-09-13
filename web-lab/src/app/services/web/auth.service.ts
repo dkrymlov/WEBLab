@@ -37,7 +37,6 @@ export class AuthService {
     AuthService.removeSession()
     console.log("LOGGED OUT")
     this.router.navigate(['../login']).then(r => {
-
     });
   }
 
@@ -85,7 +84,7 @@ export class AuthService {
   getNewAccessToken() {
     return this.http.get(`${this.webRequestService.ROOT_URL}/users/me/access-token`, this.httpOptions)
       .pipe(
-        tap((res:HttpResponse<any>) => {
+        tap((res:any) => {
           this.setAccessToken(res.headers.get('x-access-token'));
         })
       )}

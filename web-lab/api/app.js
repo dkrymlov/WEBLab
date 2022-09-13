@@ -2,17 +2,34 @@ const express = require('express');
 const app = express();
 const { mongoose } = require('./db/mongoose');
 const bodyParser = require('body-parser');
+const { createServer } = require("http");
+const { Server } = require("socket.io");
 // Load in the mongoose models
-const { List, Task, User } = require('./db/models');
-//socket.io
-
 const jwt = require('jsonwebtoken');
 const {connection} = require("mongoose");
+const { List, Task, User } = require('./db/models');
+//socket.io
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+  cors: {
+    origin: "http://localhost:4200",
+    methods: ["GET", "POST"]
+  }
+});
+
+io.on('connection', (socket)=>{
+  console.log('a user connected');
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  })
+})
 
 var server = app.listen(3000, () => {
   console.log("Server is listening on port 3000");
 })
 
+io.listen(server)
 
 /* MIDDLEWARE  */
 
@@ -137,6 +154,7 @@ app.get('/todo/lists', authenticate, (req, res) => {
  * POST /lists
  * Purpose: Create a list
  */
+
 app.post('/todo/lists', authenticate, (req, res) => {
   // We want to create a new list and return the new list document back to the user (which includes the id)
   // The list information (fields) will be passed in via the JSON request body
@@ -188,6 +206,7 @@ app.patch('/todo/lists/:id', authenticate, (req, res) => {
  * DELETE /lists/:id
  * Purpose: Delete a list
  */
+
 app.delete('/todo/lists/:id', authenticate, (req, res) => {
   // We want to delete the specified list (document with id in the URL)
   List.findOneAndRemove({

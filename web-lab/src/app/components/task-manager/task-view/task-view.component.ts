@@ -3,6 +3,7 @@ import {TaskService} from "../../../services/task/task.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import {ListService} from "../../../services/list/list.service";
+import {SocketsService} from "../../../services/web/sockets.service";
 
 @Component({
   selector: 'app-task-view',
@@ -17,7 +18,7 @@ export class TaskViewComponent implements OnInit {
 
   isTaskBtnVisible: boolean = false
 
-  constructor(private listService:ListService, private taskService: TaskService, private route: ActivatedRoute, private router: Router) {
+  constructor(private listService:ListService, private taskService: TaskService, private route: ActivatedRoute, private router: Router, private socketsService: SocketsService) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -25,6 +26,8 @@ export class TaskViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.socketsService.setupSocketConnection()
+
     this.lists = undefined
     this.route.params.subscribe(
       (params: Params) => {
@@ -44,6 +47,10 @@ export class TaskViewComponent implements OnInit {
     this.listService.getLists().subscribe((lists: any) => {
       this.lists = lists;
     })
+  }
+
+  ngOnDestroy() {
+    this.socketsService.disconnect()
   }
 
   onTaskClick(task: any) {
@@ -73,6 +80,9 @@ export class TaskViewComponent implements OnInit {
       this.listService.deleteList(_listId).subscribe(()=>{
         console.log("Delete list " + _listId + " successful!")
       })
+    this.socketsService.socket.on('listDel', (data: string) => {
+      console.log(data);
+    });
     setTimeout(()=>{
       this.ngOnInit()
     }, 100)
