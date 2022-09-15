@@ -131,12 +131,7 @@ let verifySession = (req, res, next) => {
 }
 
 /* END MIDDLEWARE  */
-
-
-
-
 /* ROUTE HANDLERS */
-
 /* LIST ROUTES */
 
 /**

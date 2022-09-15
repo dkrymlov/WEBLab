@@ -2,6 +2,8 @@ import {Component, OnInit, SimpleChanges} from '@angular/core';
 import {TaskViewComponent} from "../task-view/task-view.component";
 import {TaskService} from "../../../services/task/task.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
+import {AuthService} from "../../../services/web/auth.service";
+import {SocketsService} from "../../../services/web/sockets.service";
 
 @Component({
   selector: 'app-new-task',
@@ -10,7 +12,7 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 })
 export class NewTaskComponent implements OnInit {
 
-  constructor(private taskService: TaskService, private route: ActivatedRoute, private router: Router) {
+  constructor(private authService: AuthService, private socketsService: SocketsService, private taskService: TaskService, private route: ActivatedRoute, private router: Router) {
   }
 
   listId: string = '';
@@ -28,6 +30,7 @@ export class NewTaskComponent implements OnInit {
 
   createTask(title: string) {
     this.taskService.createTask(title, this.listId).subscribe((response: any)=>{
+      this.socketsService.socket.emit('taskChanges', {userId: this.authService.getUserId()})
       console.log(response)
     })
   }

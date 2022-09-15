@@ -37,6 +37,6 @@ export class LoginPageComponent implements OnInit {
     })
     setTimeout(()=>{
       this.badRequest = true
-    }, 100)
+    }, 300)
   }
 }

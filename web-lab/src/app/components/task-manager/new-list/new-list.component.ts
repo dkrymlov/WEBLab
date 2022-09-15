@@ -13,7 +13,7 @@ export class NewListComponent implements OnInit {
   inputModel: any = "";
   userId: string | null = ''
 
-  constructor(private socketService: SocketsService, private authService: AuthService, private listService: ListService, private route: ActivatedRoute) { }
+  constructor(private socketsService: SocketsService, private authService: AuthService, private listService: ListService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +23,7 @@ export class NewListComponent implements OnInit {
     this.userId = this.authService.getUserId()
 
     this.listService.createList(title).subscribe((response: any)=>{
+      this.socketsService.socket.emit('listChanges', {userId: this.authService.getUserId()})
       console.log(response)
     })
 

@@ -12,14 +12,14 @@ const UserSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    minlength: 1,
+    minlength: 5,
     trim: true,
     unique: true
   },
   password: {
     type: String,
     required: true,
-    minlength: 8
+    minlength: 6
   },
   sessions: [{
     token: {
@@ -32,7 +32,6 @@ const UserSchema = new mongoose.Schema({
     }
   }]
 });
-
 
 // *** Instance methods ***
 
