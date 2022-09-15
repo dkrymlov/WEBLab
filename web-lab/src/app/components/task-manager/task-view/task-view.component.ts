@@ -4,6 +4,7 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import {ListService} from "../../../services/list/list.service";
 import {SocketsService} from "../../../services/web/sockets.service";
+import {AuthService} from "../../../services/web/auth.service";
 
 @Component({
   selector: 'app-task-view',
@@ -18,15 +19,12 @@ export class TaskViewComponent implements OnInit {
 
   isTaskBtnVisible: boolean = false
 
-  constructor(private listService:ListService, private taskService: TaskService, private route: ActivatedRoute, private router: Router, private socketsService: SocketsService) {
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes)
+  constructor(private authService: AuthService, private listService:ListService, private taskService: TaskService, private route: ActivatedRoute, private router: Router, private socketsService: SocketsService) {
   }
 
   ngOnInit() {
-    this.socketsService.setupSocketConnection()
+
+    this.socketsService.connect(this.authService.getUserId())
 
     this.lists = undefined
     this.route.params.subscribe(
@@ -43,9 +41,18 @@ export class TaskViewComponent implements OnInit {
         }
       }
     )
-
     this.listService.getLists().subscribe((lists: any) => {
       this.lists = lists;
+    })
+
+    this.socketsService.socket.on('listChange', (message:string)=>{
+      setTimeout(()=>{
+        this.listService.getLists().subscribe((lists: any) => {
+          this.lists = lists;
+          console.log(lists)
+        })
+      }, 500)
+      console.log(message)
     })
   }
 
@@ -80,9 +87,7 @@ export class TaskViewComponent implements OnInit {
       this.listService.deleteList(_listId).subscribe(()=>{
         console.log("Delete list " + _listId + " successful!")
       })
-    this.socketsService.socket.on('listDel', (data: string) => {
-      console.log(data);
-    });
+      this.socketsService.socket.emit('listChanges', {userId: this.authService.getUserId()})
     setTimeout(()=>{
       this.ngOnInit()
     }, 100)
@@ -99,4 +104,5 @@ export class TaskViewComponent implements OnInit {
         $event.currentIndex);
     }
   }
+
 }

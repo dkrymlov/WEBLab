@@ -10,7 +10,7 @@ import {SocketsService} from "../../services/web/sockets.service";
 export class HeaderComponent implements OnInit {
   loggedIn: boolean = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private socketsService: SocketsService, private authService: AuthService) { }
 
   ngOnInit(): void {
     console.log(this.authService.getUserId())
