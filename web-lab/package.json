@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "e2e": "cypress open"
   },
   "private": true,
   "dependencies": {
@@ -21,10 +22,11 @@
     "@angular/router": "^14.0.0",
     "bcryptjs": "^2.4.3",
     "bulma": "^0.9.4",
+    "chance": "^1.1.8",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.5.4",
     "ngx-socket-io": "^4.3.1",
-    "rxjs": "~6.5.3",
+    "rxjs": "~7.5.6",
     "socket.io": "^4.5.2",
     "socket.io-client": "^4.5.2",
     "tslib": "^2.3.0",
@@ -35,6 +37,7 @@
     "@angular/cli": "~14.0.1",
     "@angular/compiler-cli": "^14.0.0",
     "@types/jasmine": "~4.0.0",
+    "cypress": "^10.8.0",
     "jasmine-core": "~4.1.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
