@@ -10,6 +10,7 @@
     "test": "ng test",
     "e2e": "cypress open"
   },
+  "heroku-postbuild": "ng build",
   "engines": {
     "node": "18.8.0",
     "npm": "8.19.1"
@@ -27,6 +28,7 @@
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
+    "typescript": "~4.7.2",
     "bcryptjs": "^2.4.3",
     "bulma": "^0.9.4",
     "chance": "^1.1.8",
