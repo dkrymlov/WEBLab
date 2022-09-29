@@ -1,0 +1,24 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<header>
+  <div class="home-block" *ngIf="loggedIn" routerLink="">
+    <div>
+      <mat-icon class="login-ico">assignment_turned_in</mat-icon>
+      <span>ToDo</span>
+    </div>
+  </div>
+  <div class="login-block">
+    <div routerLink="/login">
+      <mat-icon class="login-ico">account_box</mat-icon>
+      <span>Login</span>
+    </div>
+    <div routerLink="/signup">
+      <mat-icon class="login-ico">add_box</mat-icon>
+      <span>Signup</span>
+    </div>
+    <div routerLink="/login" (click)="onLogout()">
+      <mat-icon class="login-ico">exit_to_app</mat-icon>
+      <span>Logout</span>
+    </div>
+  </div>
+</header>

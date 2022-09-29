@@ -1,0 +1,69 @@
+header{
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 70px;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+.login-ico{
+  transform: scale(1.5);
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 10px;
+}
+
+.login-block{
+  width: 320px;
+  padding: 10px 10px;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  font-size: 25px;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  margin: 0 10px 0 auto;
+  div{
+    transition: all 0.2s ease 0s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    outline: none;
+    &:hover{
+      transform: translateY(-3px);
+    }
+    &:active{
+      transform: scale(0.9);
+    }
+  }
+}
+
+.home-block{
+  width: auto;
+  padding: 10px 10px;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  font-size: 25px;
+  display: flex;
+  flex-flow: row;
+  margin-left: 10px;
+  justify-content: center;
+  outline: none;
+  div{
+    transition: all 0.2s ease 0s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    &:hover{
+      transform: translateY(-3px);
+    }
+    &:active{
+      transform: scale(0.9);
+    }
+  }
+}
+

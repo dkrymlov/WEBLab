@@ -1,0 +1,11 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="main-container">
+  <h1>Create a new task</h1>
+  <div class="enhanced-input">
+    <mat-icon>bookmark icon</mat-icon>
+    <input #input [(ngModel)]="inputModel" type="text" placeholder="Title">
+    <button (click)="createTask(input.value)" [disabled]="inputModel ==''" [ngClass]="{'not-active': inputModel === ''}" routerLink="..">Create</button>
+  </div>
+  <a class="backBtn" routerLink="..">Go back</a>
+</div>

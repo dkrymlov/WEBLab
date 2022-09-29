@@ -1,0 +1,20 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="main-container">
+  <h1>Signup</h1>
+  <div class="err">
+    <span *ngIf="badRequest">Wrong credentials!</span>
+  </div>
+  <div class="enhanced-input">
+    <mat-icon> email</mat-icon>
+    <input [(ngModel)]="email" placeholder="Email">
+  </div>
+  <div class="enhanced-input">
+    <mat-icon>lock</mat-icon>
+    <input [(ngModel)]="password" placeholder="Password">
+  </div>
+  <div class="bottom">
+    <a routerLink="/login" href="">Login</a>
+    <button [disabled]="email == '' && password == ''" (click)="onSignUp(email, password)">Submit</button>
+  </div>
+</div>

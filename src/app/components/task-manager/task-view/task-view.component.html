@@ -1,0 +1,59 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="main-container">
+  <div class="left-bar">
+
+    <div class="top">
+      <h1>Lists</h1>
+    </div>
+
+    <div class="list-menu" cdkDropList [cdkDropListData]="lists" (cdkDropListDropped)="drop($event)">
+      <div class="list-control" cdkDrag cdkDragPreviewContainer="parent" *ngFor="let list of lists" >
+        <a class="list-menu-item" #item [routerLink]="['/todo/lists', list._id]" routerLinkActive="is-active">
+          <p>{{list.title}}</p>
+        </a>
+        <div class="list-buttons" [ngClass]="{'invisible' : !item.classList.contains('is-active') }">
+          <div class="edit-btn" [routerLink]="['./edit']">
+            <mat-icon>edit</mat-icon>
+          </div>
+          <div class="delete-btn" (click)="deleteList(list._id)">
+            <mat-icon>delete</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <button routerLink="/todo/new-list">+ New List</button>
+    </div>
+
+  </div>
+  <div class="right-bar">
+    <div class="top">
+      <h1 *ngIf="tasks">Tasks</h1>
+      <h1 *ngIf="!tasks" style="opacity: 50%; color: black">Please select a list from the sidebar</h1>
+    </div>
+
+
+    <div cdkDropList [cdkDropListData]="tasks" (cdkDropListDropped)="drop($event)" class="task-menu">
+      <div class="task-control" *ngFor="let task of tasks">
+        <a class="task-menu-item" cdkDrag cdkDragPreviewContainer="parent" (click)="onTaskClick(task)" [ngClass]="{'complete':task.completed}">
+          <div>{{task.title}}</div>
+        </a>
+        <div class="task-buttons">
+          <div class="edit-btn" [routerLink]="['./' + task._id + '/edit']">
+            <mat-icon>edit</mat-icon>
+          </div>
+          <div class="delete-btn" (click)="deleteTask(task._id, task._listId)">
+            <mat-icon>delete</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div *ngIf="isTaskBtnVisible" class="bottom">
+      <button [disabled]="!isTaskBtnVisible" routerLink="./new-task">+ New Task</button>
+    </div>
+  </div>
+</div>
