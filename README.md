@@ -11,7 +11,9 @@
 4) У другій вкладці консолі з папки *папка проекту*\api запустити сервер за допомогою команди "nodemon .\app.js"
 # На які пункти претендує
 С5 JSON/XML (REST) API
-аа
+
+QA2 E2E тестування.
+
 С10 Connectivity. Web Sockets.
 
 С12 2-do list (Dynamic UI).
@@ -27,6 +29,8 @@ F5 Single Page Application.
 20 балів
 # Q&A
 C5 - AngularJS Сучасна імплементація REST
+
+QA2 - Бібліотека Cypress
 
 C10,C13 - SocketIO Library Зручна бібліотека з підтримкою кімнат для сокетів
 
