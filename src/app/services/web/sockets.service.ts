@@ -14,7 +14,7 @@ export class SocketsService {
   socket: any;
 
   connect(userId: string | null) {
-    this.socket = io(environment.SOCKET_ENDPOINT);
+    this.socket = io('http://localhost:3000');
     console.log(this.authService.getUserId())
   }
 
