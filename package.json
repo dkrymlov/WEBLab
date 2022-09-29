@@ -2,7 +2,7 @@
   "name": "web-lab",
   "version": "0.0.0",
   "scripts": {
-    "heroku-postbuild": "ng build --configuration production",
+    "heroku-postbuild": "ng build --watch",
     "ng": "ng",
     "start": "node server.js",
     "build": "ng build",
@@ -10,7 +10,6 @@
     "test": "ng test",
     "e2e": "cypress open"
   },
-  "heroku-postbuild": "ng build",
   "engines": {
     "node": "16.15.1",
     "npm": "8.12.1"
