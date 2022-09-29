@@ -10,6 +10,10 @@
     "test": "ng test",
     "e2e": "cypress open"
   },
+  "engines": {
+    "node": "18.8.0",
+    "npm": "8.19.1"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^14.0.0",
