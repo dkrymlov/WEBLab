@@ -17,6 +17,9 @@ import { HeaderComponent } from './components/header/header.component';
 import {WebReqInterceptor} from "./services/web/web-req.interceptor";
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { InfiniteScrollComponent } from './components/infinite-scroll/infinite-scroll.component';
+import {InfiniteScrollModule} from "ngx-infinite-scroll";
+import { BtnGameComponent } from './components/btn-game/btn-game.component';
 
 @NgModule({
   declarations: [
@@ -29,16 +32,19 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     EditTaskComponent,
     EditListComponent,
     HeaderComponent,
+    InfiniteScrollComponent,
+    BtnGameComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MatIconModule,
-        HttpClientModule,
-        FormsModule,
-        DragDropModule,
-        BrowserAnimationsModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MatIconModule,
+    HttpClientModule,
+    FormsModule,
+    DragDropModule,
+    BrowserAnimationsModule,
+    InfiniteScrollModule
+  ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptor, multi: true}
   ],

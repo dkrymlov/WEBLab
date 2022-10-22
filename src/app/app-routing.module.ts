@@ -7,6 +7,8 @@ import {EditTaskComponent} from "./components/task-manager/edit-task/edit-task.c
 import {EditListComponent} from "./components/task-manager/edit-list/edit-list.component";
 import {LoginPageComponent} from "./components/login-page/login-page.component";
 import {SignupPageComponent} from "./components/signup-page/signup-page.component";
+import {InfiniteScrollComponent} from "./components/infinite-scroll/infinite-scroll.component";
+import {BtnGameComponent} from "./components/btn-game/btn-game.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'todo/lists', pathMatch: "full"},
@@ -18,6 +20,8 @@ const routes: Routes = [
   {path: 'todo/lists/:listId/edit', component: EditListComponent},
   {path: 'todo/lists', component: TaskViewComponent},
   {path: 'todo/lists/:listId', component: TaskViewComponent},
+  {path: 'inf-scroll', component: InfiniteScrollComponent},
+  {path: 'btn-game', component: BtnGameComponent}
 ];
 
 @NgModule({

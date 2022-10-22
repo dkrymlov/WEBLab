@@ -1,0 +1,12 @@
+<span>Infinite scroll!</span>
+
+<div class="inf-scroll" infinite-scroll
+     (scrolled)="onScrollDown($event)"
+     (scrolledUp)="onScrollUp($event)">
+
+  <div class="list-group">
+    <div class="list-group-item" *ngFor="let item of items">
+      <p class="mb-1">{{item}} Item added on {{direction}}</p>
+    </div>
+  </div>
+</div>
