@@ -19,7 +19,7 @@ export class BtnGameComponent implements OnInit {
   }
 
   changePosition() {
-    let max = 2000;
+    let max = 800;
     let min = 200;
     this.y = (Math.floor(Math.random() * (max - min + 1)) + min) + 'px';
     this.x = (Math.floor(Math.random() * (max - min + 1)) + min) + 'px';
