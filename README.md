@@ -1,42 +1,49 @@
-# WEBLab
-# Про проект
-Лабораторна робота з дисципліни WEB - технології
-# Як запустити
-1) Завантажити MongoDB Community Server, MongoDB Compass, MongoDB Shell
+# AngularJS TaskViewer
+# About
+Simple TaskViewer working on AngularJS Framework. 
+# Features
 
-2) У MongoDB Compass створити нове з'єднання
+JWT User validation
 
-3) Через консоль із папки з проектом запустити його за допомогою команди "npm start"
+Almost instant sync between browsers
 
-4) У другій вкладці консолі з папки *папка проекту*\api запустити сервер за допомогою команди "nodemon .\app.js"
-# На які пункти претендує
-С5 JSON/XML (REST) API
+Easy to use
 
-QA2 E2E тестування.
+User friendly interface
 
-С10 Connectivity. Web Sockets.
+Looks awesome
 
-С12 2-do list (Dynamic UI).
+# How to make it work
+1) Download MongoDB Community Server, MongoDB Compass.
 
-F3 Drag-n-Drop анімації.
+2) In MongoDB Compass create new connection
 
-C13 Синхронізація змін між пристроями.
+3) Run "npm install" command in root folder
 
-C16 Автентифікація та авторизація.
+4) Start API by running command "node app.js" in /api folder
 
-F5 Single Page Application.
+5) Run "npm start" command in root folder
 
-20 балів
-# Q&A
-C5 - AngularJS Сучасна імплементація REST
+6) Goto localhost:port to see the result
 
-QA2 - Бібліотека Cypress
+# Used Technologies
 
-C10,C13 - SocketIO Library Зручна бібліотека з підтримкою кімнат для сокетів
+NodeJs
 
-F3 - Angular Drag-n-Drop module
+AngularJs
 
-C16 - Автентифікація та авторизація за допомогою JWT з підтримкою рефреш токену
+Typescript
 
-F5 - AngularJS Сучасний JSON фреймворк
-# Made by Danil Krymlov & Maksym Tiulpa
+Javascript
+
+HTML5
+
+SCSS
+
+Socket.io
+
+E2E Cypress
+
+JWT
+
+# Made by Danil Krymlov
