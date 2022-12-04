@@ -46,4 +46,6 @@ E2E Cypress
 
 JWT
 
+NoSQL \ MongoDB 
+
 # Made by Danil Krymlov
