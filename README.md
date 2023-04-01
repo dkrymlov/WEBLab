@@ -1,6 +1,13 @@
 # AngularJS TaskViewer
 # About
 Simple TaskViewer working on AngularJS Framework. 
+
+# Photo Gallery
+![alt text](https://imgur.com/Q329Lf6.jpg)
+![alt text](https://imgur.com/xHRwi2W.jpg)
+![alt text](https://imgur.com/O1moZel.jpg)
+![alt text](https://imgur.com/Sn094T8.jpg)
+
 # Features
 
 JWT User validation
