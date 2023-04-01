@@ -1,5 +1,5 @@
 # AngularJS TaskViewer
-![alt text](https://imgur.com/XtiL0fH)
+![alt text](https://i.imgur.com/XtiL0fH.jpg)
 # About
 Simple TaskViewer working on AngularJS Framework. 
 # Features
