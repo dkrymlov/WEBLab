@@ -1,6 +1,6 @@
-# AngularJS TaskViewer
+# Angular TaskViewer
 # About
-Simple TaskViewer working on AngularJS Framework. 
+Simple TaskViewer working on Angular 2+ Framework. 
 
 # Photo Gallery
 ![alt text](https://imgur.com/Q329Lf6.jpg)
@@ -37,7 +37,7 @@ Looks awesome
 
 NodeJs
 
-AngularJs
+Angular 2+
 
 Typescript
 
